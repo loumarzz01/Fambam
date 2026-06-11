@@ -8,6 +8,7 @@ export default function App() {
   const [name, setName] = useState("")
 
   useEffect(() => {
+    alert('Check out the new name feature!')
     fetchPosts();
   }, []);
 
@@ -26,10 +27,12 @@ export default function App() {
 
   const [newPost, setNewPost] = useState('')
 
+  
+
   const submitPost = async () => {
     const { error } = await supabase
       .from('posts')
-      .insert([{ content: `${name}: ${newPost}` }]);
+      .insert([{ content: `${name} - ${newPost}` }]);
 
     if (error) {
       console.error(error);
