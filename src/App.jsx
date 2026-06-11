@@ -1,16 +1,14 @@
 import {useEffect, useState} from 'react';
 import { supabase } from './supabaseClient';
 
+import './App.css'
+
 export default function App() {
 
   const [posts, setPosts] = useState([]);
 
   const [name, setName] = useState("")
 
-  useEffect(() => {
-    alert('Check out the new name feature!')
-    fetchPosts();
-  }, []);
 
   const fetchPosts = async () => {
     const { data, error } = await supabase
