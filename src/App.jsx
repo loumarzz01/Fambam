@@ -10,27 +10,32 @@ export default function App() {
   }, []);
 
   const fetchPosts = async () => {
-  const { data, error } = await supabase
-    .from('posts')
-    .select('*');
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*');
 
-  setPosts(data);
-}
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+    setPosts(data || []);
+  }
 
   const [newPost, setNewPost] = useState('')
 
   const submitPost = async () => {
-  const { data, error } = await supabase
-    .from('posts')
-    .insert([{ content: newPost }]);
+    const { error } = await supabase
+      .from('posts')
+      .insert([{ content: newPost }]);
 
-  if (error) {
-    console.error(error);
-    return;
-  }
+    if (error) {
+      console.error(error);
+      return;
+    }
 
-  fetchPosts();
-  setNewPost('');
+    fetchPosts();
+    setNewPost('');
   };
 
 
