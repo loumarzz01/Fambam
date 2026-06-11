@@ -44,31 +44,42 @@ export default function App() {
 
 
   return (
-    <div >
-      <div className='scroll'>
-        {posts?.map((post) => (
-          <p style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
-        ))}
+    <div className='container'>
+
+      <div>
+
+
+        <div className='scroll'>
+          {posts?.map((post) => (
+            <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
+          ))}
+        </div>
+
+        <div className='container2'>
+          <input className="input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder='Enter name'
+          />
+
+          <input className="input"
+            value={newPost}
+            onChange={(e) => setNewPost(e.target.value)}
+            placeholder='Send post'
+          />
+
+          
+
+          <button className="post-button" onClick={submitPost}>Post</button>
+
+
+          <p className="text">(scroll up and down to view all messages)</p>
+        </div>
+
+
+
       </div>
 
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder='Enter name'
-      />
-
-      <input
-        value={newPost}
-        onChange={(e) => setNewPost(e.target.value)}
-        placeholder='Send post'
-      />
-
-      
-
-      <button onClick={submitPost}>Post</button>
-
-
-      <p>(scroll up and down to view all messages)</p>
     </div>
   )
 }

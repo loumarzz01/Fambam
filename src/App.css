@@ -1,13 +1,50 @@
 .container {
   height: 100vh;
   display: flex;
+  font-family: poppins;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .scroll {
   height: 400px;
   overflow-y: auto;
 
+}
+
+
+
+input {
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+  box-shadow: 0 0 10px #0000002a;
+  margin-right: 10px;
+}
+
+input:focus {
+  border-color: #e54646;
+  box-shadow: 0 0 5px rgba(229, 70, 70, 0.3);
+}
+
+.input:placeholder {
+  font-family: poppins;
+
+}
+
+.post-button {
+  font-family: poppins;
+  background-color: #e54646;
+  box-shadow: 0 0 10px #0000002a;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  outline: none;
+  transition: 0.2s;
+  box-shadow: 0 0 10px #0000002a;
 }
