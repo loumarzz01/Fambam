@@ -9,6 +9,7 @@
 
 .scroll {
   height: 400px;
+  width: 500px;
   overflow-y: auto;
 
 }
@@ -40,11 +41,16 @@ input:focus {
   font-family: poppins;
   background-color: #e54646;
   box-shadow: 0 0 10px #0000002a;
-  padding: 10px;
+  padding: 10px 40px;
   border-radius: 8px;
+  cursor: pointer;
   border: none;
   color: white;
   outline: none;
   transition: 0.2s;
   box-shadow: 0 0 10px #0000002a;
+}
+
+.post-button:hover {
+  background-color: rgb(255, 99, 99);
 }

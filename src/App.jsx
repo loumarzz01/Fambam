@@ -24,7 +24,7 @@ export default function App() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   const [newPost, setNewPost] = useState('')
 
