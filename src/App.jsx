@@ -5,6 +5,8 @@ export default function App() {
 
   const [posts, setPosts] = useState([]);
 
+  const [name, setName] = useState("")
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -27,7 +29,7 @@ export default function App() {
   const submitPost = async () => {
     const { error } = await supabase
       .from('posts')
-      .insert([{ content: newPost }]);
+      .insert([{ content: `${name}: ${newPost}` }]);
 
     if (error) {
       console.error(error);
@@ -45,6 +47,8 @@ export default function App() {
         <p key={post.id}> {post.content}</p>
       ))}
 
+      
+      <input value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter your name'/>
       <input value={newPost} onChange={(e) => setNewPost(e.target.value)} placeholder='Send post'/>
       <button onClick={submitPost}> Post</button>
     </div>
