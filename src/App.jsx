@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import { supabase } from './supabaseClient';
 
-import './App.css';
+import './App.css'
 
 export default function App() {
+
   const [posts, setPosts] = useState([]);
-  const [name, setName] = useState('');
-  const [newPost, setNewPost] = useState('');
+
+  const [name, setName ] = useState('')
 
   const fetchPosts = async () => {
     const { data, error } = await supabase
@@ -19,15 +20,15 @@ export default function App() {
     }
 
     setPosts(data || []);
-  };
+  }
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  const submitPost = async () => {
-    if (!name || !newPost) return;
+  const [newPost, setNewPost] = useState('')
 
+  const submitPost = async () => {
     const { error } = await supabase
       .from('posts')
       .insert([{ name: name, content: newPost }]);
@@ -41,39 +42,33 @@ export default function App() {
     setNewPost('');
   };
 
+
   return (
-    <div>
-    <div className="scroll">
-      {posts?.map((post) => (
-        <p
-          key={post.id}
-          style={{
-            color: post.name === 'Louis' ? 'red' : 'black',
-            fontWeight: post.name === 'Louis' ? 'bold' : 'lighter',
-          }}
-        >
-          <b>{post.name}</b> - {post.content}
-        </p>
-      ))}
+    <div >
+      <div className='scroll'>
+        {posts?.map((post) => (
+          <p style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
+        ))}
+      </div>
 
-      
-    </div>
-
-    <input
+      <input
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Enter your name"
+        placeholder='Enter name'
       />
 
       <input
         value={newPost}
         onChange={(e) => setNewPost(e.target.value)}
-        placeholder="Send post"
+        placeholder='Send post'
       />
+
+      
 
       <button onClick={submitPost}>Post</button>
 
-      <p>(scroll up and down to view all posts)</p>
+
+      <p>(scroll up and down to view all messages)</p>
     </div>
-  );
+  )
 }
