@@ -43,6 +43,7 @@ export default function App() {
 
   return (
     <div>
+    <div className="scroll">
       {posts?.map((post) => (
         <p
           key={post.id}
@@ -55,7 +56,10 @@ export default function App() {
         </p>
       ))}
 
-      <input
+      
+    </div>
+
+    <input
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Enter your name"
@@ -68,6 +72,8 @@ export default function App() {
       />
 
       <button onClick={submitPost}>Post</button>
+
+      <p>(scroll up and down to view all posts)</p>
     </div>
   );
 }
