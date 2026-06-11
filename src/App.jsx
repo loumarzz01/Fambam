@@ -24,11 +24,16 @@ export default function App() {
 
   useEffect(() => {
     fetchPosts();
-  }, [posts]);
+  }, []);
 
   const [newPost, setNewPost] = useState('')
 
   const submitPost = async () => {
+
+    if (!newPost || !name) {
+      return;
+    }
+
     const { error } = await supabase
       .from('posts')
       .insert([{ name: name, content: newPost }]);
