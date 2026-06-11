@@ -1,9 +1,10 @@
 import { createClient } from "@supabase/supabase-js"; //Imports the libray to talk to supabase
 
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_URL
 
+
+const supabaseUrl = 'https://semqamjcbgigzxqnqsbs.supabase.co'; //Supabase project identifier
+const supabaseKey = 'sb_publishable_YFPuKiwVnt-VDJmE4feUSQ_5FP5RLce'; //Public security key
 export const supabase = createClient(supabaseUrl, supabaseKey) //Initialize the client and export it to use it anywhere in your app
 
 
