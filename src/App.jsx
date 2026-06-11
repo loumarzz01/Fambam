@@ -1,36 +1,36 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from './supabaseClient';
 
-import './App.css'
+import './App.css';
 
 export default function App() {
-
   const [posts, setPosts] = useState([]);
-
-  const [name, setName] = useState("")
-
+  const [name, setName] = useState('');
+  const [newPost, setNewPost] = useState('');
 
   const fetchPosts = async () => {
     const { data, error } = await supabase
       .from('posts')
       .select('*');
 
-      if (error) {
-        console.log(error);
-        return;
-      }
+    if (error) {
+      console.log(error);
+      return;
+    }
 
     setPosts(data || []);
-  }
+  };
 
-  const [newPost, setNewPost] = useState('')
-
-  
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   const submitPost = async () => {
+    if (!name || !newPost) return;
+
     const { error } = await supabase
       .from('posts')
-      .insert([{ content: `${name} - ${newPost}` }]);
+      .insert([{ name: name, content: newPost }]);
 
     if (error) {
       console.error(error);
@@ -41,17 +41,33 @@ export default function App() {
     setNewPost('');
   };
 
-
   return (
     <div>
       {posts?.map((post) => (
-        <p key={post.id}> {post.content}</p>
+        <p
+          key={post.id}
+          style={{
+            color: post.name === 'Louis' ? 'red' : 'black',
+            fontWeight: post.name === 'Louis' ? 'bold' : 'lighter',
+          }}
+        >
+          <b>{post.name}</b> - {post.content}
+        </p>
       ))}
 
-      
-      <input value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter your name'/>
-      <input value={newPost} onChange={(e) => setNewPost(e.target.value)} placeholder='Send post'/>
-      <button onClick={submitPost}> Post</button>
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter your name"
+      />
+
+      <input
+        value={newPost}
+        onChange={(e) => setNewPost(e.target.value)}
+        placeholder="Send post"
+      />
+
+      <button onClick={submitPost}>Post</button>
     </div>
-  )
+  );
 }
