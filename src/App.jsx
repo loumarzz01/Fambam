@@ -1,6 +1,8 @@
 import {useEffect, useState, useRef} from 'react';
 import { supabase } from './supabaseClient';
 
+import { IoSend } from "react-icons/io5";
+
 import './App.css'
 
 export default function App() {
@@ -19,9 +21,11 @@ export default function App() {
       return;
     }
 
+    
+
     setPosts(data || []);
   }
-
+  
   useEffect(() => {
     const load = async () => {
       fetchPosts()
@@ -67,24 +71,29 @@ export default function App() {
     
   }, [posts])
 
+  
+
 
   return (
     <div className='container'>
 
-      <div>
+      <div className='messageContainer'>
 
 
         <div className='scroll'>
           <div className='messages'>
             {posts?.map((post) => (
-              <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
+              <div className='message'>
+                <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
+                <p className='time'> {new Date(post.created_at).toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit", timeZone: "Europe/London"})}</p>
+              </div>
             ))}
 
             <div ref={bottomRef} />
           </div>
         </div>
 
-        <div className='container2'>
+        <div >
           <input className="input"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -99,10 +108,10 @@ export default function App() {
 
           
 
-          <button className="post-button" onClick={submitPost}>Post</button>
+          <button className="post-button" onClick={submitPost}>
+            <IoSend className="send-icon"/>
+          </button>
 
-
-          <p className="text">(scroll up and down to view all messages)</p>
         </div>
 
 
