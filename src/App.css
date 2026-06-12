@@ -66,6 +66,8 @@ body {
   font-size: 13px;
   margin-left: -30px;
 
+  max-width: 250px;
+
 }
 
 .text {

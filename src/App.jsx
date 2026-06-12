@@ -9,7 +9,6 @@ export default function App() {
 
   const [posts, setPosts] = useState([]);
 
-  const [name, setName ] = useState('')
 
   const fetchPosts = async () => {
     const { data, error } = await supabase
@@ -93,7 +92,7 @@ export default function App() {
               <div className='message'>
                 
                 <p className='post-name'>{post.name}</p>
-                <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.content}</p>
+                <p className="text" key={post.id}>{post.content}</p>
                 <p className='post-time'>{post.time}</p>
               </div>
             ))}
