@@ -22,6 +22,7 @@ body {
   box-shadow: 0 0 10px 10px #00000009;
   overflow: hidden;
   border: 1px solid #ccc;
+  
 }
 
 .scroll {
@@ -42,8 +43,28 @@ body {
 
 .message {
   display: flex;
-  flex-direction: row;
-  gap: 10px;
+  flex-direction: column;
+  gap: 0px;
+  padding: 0px 10px;
+  background-color: #f1f1f1;
+  margin-bottom: 20px;
+
+  width:fit-content;
+  max-width: 50%;
+  border-radius: 15px;
+  
+}
+
+.text {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  margin-top: -10px;
+  max-width: 100%;
+}
+
+.post-name {
+  font-weight: 500;
 }
 
 input {

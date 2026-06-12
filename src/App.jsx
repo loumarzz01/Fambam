@@ -46,9 +46,14 @@ export default function App() {
       return;
     }
 
+    const now = new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
     const { error } = await supabase
       .from('posts')
-      .insert([{ name: name, content: newPost }]);
+      .insert([{ name: name, content: newPost, time: now }]);
 
     if (error) {
       console.error(error);
@@ -72,6 +77,8 @@ export default function App() {
   }, [posts])
 
   
+  
+
 
 
   return (
@@ -84,8 +91,9 @@ export default function App() {
           <div className='messages'>
             {posts?.map((post) => (
               <div className='message'>
-                <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
-                <p className='time'> {new Date(post.created_at).toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit", timeZone: "Europe/London"})}</p>
+                <p>{post.time}</p>
+                <p className="post-name">{post.name}</p>
+                <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.content}</p>
               </div>
             ))}
 
