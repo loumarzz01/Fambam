@@ -60,7 +60,7 @@ export default function App() {
 
   useEffect(() => {
     if (posts.length > prevCountRef.current) {
-      bottomRef.current?.scrollIntoView({ behaviour: 'smooth'})
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth'})
     }
 
     prevCountRef.current = posts.length;
