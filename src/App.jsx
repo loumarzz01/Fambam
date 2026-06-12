@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import { supabase } from './supabaseClient';
 
 import './App.css'
@@ -55,6 +55,12 @@ export default function App() {
     setNewPost('');
   };
 
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behaviour: 'smooth'})
+  }, [posts])
+
 
   return (
     <div className='container'>
@@ -67,7 +73,9 @@ export default function App() {
             {posts?.map((post) => (
               <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
             ))}
-          </div>      
+
+            <div ref={bottomRef} />
+          </div>
         </div>
 
         <div className='container2'>
