@@ -12,9 +12,13 @@
   width: 500px;
   overflow-y: auto;
 
+  display: flex;
+  flex-direction: column;
 }
 
-
+.messages {
+  margin-top: auto;
+}
 
 input {
   font-family: 'Poppins', sans-serif;

@@ -23,7 +23,15 @@ export default function App() {
   }
 
   useEffect(() => {
-    fetchPosts();
+    const load = async () => {
+      fetchPosts()
+    }
+
+    const interval = setInterval(() => {
+      load()
+    }, 2000)
+
+    return () => clearInterval(interval)
   }, []);
 
   const [newPost, setNewPost] = useState('')
@@ -55,9 +63,11 @@ export default function App() {
 
 
         <div className='scroll'>
-          {posts?.map((post) => (
-            <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
-          ))}
+          <div className='messages'>
+            {posts?.map((post) => (
+              <p className="text" style={{color: post.name === 'Louis' ? "red" : "black", fontWeight: post.name === 'Louis' ? "bold" : "lighter"}} key={post.id}>{post.name} - {post.content}</p>
+            ))}
+          </div>      
         </div>
 
         <div className='container2'>
