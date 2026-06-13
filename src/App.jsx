@@ -103,7 +103,7 @@ export default function App() {
           <div ref={bottomRef} />
         </div>
 
-        <div >
+        <div className='input-and-button'>
           <input className="input"
             value={name}
             onChange={(e) => setName(e.target.value)}
