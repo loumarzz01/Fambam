@@ -9,7 +9,7 @@ import SignUp from './SignUp/SignUp';
 export default function AuthGate() {
     const [session, setSession] = useState(null);
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const [showSignUp, setShowSignUp] = useState(false);
 
@@ -17,13 +17,29 @@ export default function AuthGate() {
 
     useEffect(() => {
         const getSession = async () => {
-            const {data} = await supabase.auth.getSession();
+            const {data} = await supabase.auth.getSession(); //const data = result.data
 
             setSession(data.session);
             setLoading(false);
         };
 
         getSession();
+
+        //Listens for changes in authentication state
+
+        const authListener = supabase.auth.onAuthStateChange(
+            (event, session) => { //Function runs every time auth state changes. The ongoing connection of being notified whenever a state changes is called a 'subscription'
+                setSession(session)
+            }
+        )
+
+        const subscription = authListener.data.subcription; //Listener returns an object that contains a "subscription"
+
+        return () => {
+            subscription.unsubscribe() //Stops listening to avoid memory leaks. Return means "when this component leaves the screen, clean up the subscription"
+        }
+
+
     }, [])
 
     if (loading) {
