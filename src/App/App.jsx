@@ -171,14 +171,14 @@ export default function App() {
               <p className="text" >{post.content}</p>
               <p className='post-time'>{post.time}</p>
 
-              
+              <div ref={bottomRef} />
               
             </div>
 
 
           ))}
 
-          <div ref={bottomRef} />
+          
 
           
 
