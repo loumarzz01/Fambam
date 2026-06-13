@@ -1,3 +1,5 @@
+//AuthGate.jsx
+
 import { useEffect, useState } from 'react';
 
 import {supabase } from './supabaseClient'
@@ -19,6 +21,8 @@ export default function AuthGate() {
         const getSession = async () => {
             const {data} = await supabase.auth.getSession(); //const data = result.data
 
+            console.log("Session from Supabase:", data.session)
+
             setSession(data.session);
             setLoading(false);
         };
@@ -33,10 +37,10 @@ export default function AuthGate() {
             }
         )
 
-        const subscription = authListener.data.subcription; //Listener returns an object that contains a "subscription"
+        const subscription = authListener.data.subscription; //Listener returns an object that contains a "subscription"
 
         return () => {
-            subscription.unsubscribe() //Stops listening to avoid memory leaks. Return means "when this component leaves the screen, clean up the subscription"
+            subscription?.unsubscribe() //Stops listening to avoid memory leaks. Return means "when this component leaves the screen, clean up the subscription"
         }
 
 

@@ -1,3 +1,5 @@
+//App.jsx
+
 import {useEffect, useState, useRef} from 'react';
 import { supabase } from '../supabaseClient';
 
@@ -43,9 +45,15 @@ export default function App() {
 
   const [newPost, setNewPost] = useState('')
 
+
+
+
   const submitPost = async () => {
 
-    if (!newPost || !name) {
+    console.log("Post:", newPost);
+    console.log("Name:", name);
+
+    if (!newPost) {
       return;
     }
 
@@ -58,10 +66,14 @@ export default function App() {
       .from('posts')
       .insert([{ name: name, content: newPost, time: now }]);
 
+    console.log("Insert Error:", error)
+
     if (error) {
       console.error(error);
       return;
     }
+
+
 
     fetchPosts();
     setNewPost('');
@@ -83,9 +95,15 @@ export default function App() {
   const fetchProfile = async () => {
     const {data: sessionData } = await supabase.auth.getSession(); //const data = result.session
 
+    console.log("Session:", sessionData)
+
     const userId = sessionData.session.user.id;
 
-    console.log(userId)
+    if (!userId) {
+      console.log("No logged in user")
+      return;
+    }
+
 
     const {data, error} = await supabase
       .from('profiles')
@@ -93,9 +111,11 @@ export default function App() {
       .eq('id', userId) //Find rows where ID is EQUAL TO (EQ) userId
       .single(); //expect one row
 
+    console.log("Profile:", data);
+    console.log("Profile Error:", error);
+
     
     if (error) {
-      console.log(error)
       return;
     }
 
