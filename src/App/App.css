@@ -59,9 +59,21 @@ body {
 
   flex-direction: column;
 
-  gap: 4px
+  gap: 4px;
   
-  
+  animation: messageAppear 0.3s ease-out;
+}
+
+@keyframes messageAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .post-time {
@@ -163,7 +175,7 @@ input:focus {
 }
 
 .sign-out-button {
-
+  cursor: pointer;
   position: absolute;
   background-color: #e54646;
   border: none;
