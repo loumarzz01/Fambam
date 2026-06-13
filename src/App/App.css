@@ -1,10 +1,14 @@
 .container {
-  height: 100vh;
+  min-height: 100vh;
+
+  min-width: 100px;
   display: flex;
   font-family: poppins;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  padding: 20px 20px;
 }
 
 body {
@@ -17,7 +21,11 @@ body {
 }
 
 .message-container {
-  width: 500px;
+
+  width: 100%;
+  max-width: 500px;
+
+  box-sizing: border-box;
   
   padding: 20px;
 
@@ -31,7 +39,11 @@ body {
 
 .scroll {
   height: 400px;
-  width: 450px;
+  
+  width: 100%;
+
+
+
   overflow-y: auto;
 
   display: flex;
@@ -66,6 +78,7 @@ body {
   margin-bottom: 16px;
 
   max-width: 70%;
+  min-width: 10%;
   width: fit-content;
   border-radius: 16px;
   
@@ -187,6 +200,8 @@ input:focus {
 .send-icon {
   align-self: auto;
 }
+
+
 
 .sign-out-button {
   cursor: pointer;

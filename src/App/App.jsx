@@ -5,6 +5,10 @@ import { supabase } from '../supabaseClient';
 
 import { IoSend } from "react-icons/io5";
 
+import { RiDragMove2Line } from "react-icons/ri";
+
+
+
 import { FaCheck } from "react-icons/fa";
 
 import './App.css'
