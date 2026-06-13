@@ -9,6 +9,8 @@ export default function App() {
 
   const [posts, setPosts] = useState([]);
 
+  const [name, setName] = useState('')
+
 
   const fetchPosts = async () => {
     const { data, error } = await supabase
@@ -96,9 +98,9 @@ export default function App() {
                 <p className='post-time'>{post.time}</p>
               </div>
             ))}
-
-            <div ref={bottomRef} />
           </div>
+
+          <div ref={bottomRef} />
         </div>
 
         <div >
