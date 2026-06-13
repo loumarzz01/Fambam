@@ -21,7 +21,7 @@ export default function App() {
   const fetchPosts = async () => {
     const { data, error } = await supabase
       .from('posts')
-      .select('*');
+      .select('*')
 
     if (error) {
       console.log(error);
