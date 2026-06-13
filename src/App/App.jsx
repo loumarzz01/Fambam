@@ -121,6 +121,7 @@ export default function App() {
 
     
     if (error) {
+      setTimeout(fetchProfile, 1000)
       return;
     }
 
@@ -152,11 +153,11 @@ export default function App() {
         <div className='scroll'>
 
           {posts?.map((post) => (
-            <div>
+            <div key={post.id}>
             <div className='message'>
                 
               <p className='post-name'>{post.name}</p>
-              <p className="text" key={post.id}>{post.content}</p>
+              <p className="text" >{post.content}</p>
               <p className='post-time'>{post.time}</p>
               
             </div>
@@ -176,6 +177,11 @@ export default function App() {
           <input className="message-input"
             value={newPost}
             onChange={(e) => setNewPost(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                submitPost();
+              }
+            }}
             placeholder='Send post'
           />
 

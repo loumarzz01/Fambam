@@ -31,7 +31,7 @@ export default function SignUp( {onSwitchToSignIn}) {
       .insert([
         {
           id: userId,
-          name: name,
+          name,
         }
       ])
 
