@@ -230,6 +230,6 @@ input:focus {
   align-self: flex-end;
 }
 
-.my-message.post-time {
+.my-message .post-time {
   color: white;
 }

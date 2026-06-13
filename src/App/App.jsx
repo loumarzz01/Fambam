@@ -1,34 +1,36 @@
 //App.jsx
 
-import {useEffect, useState, useRef} from 'react';
-import { supabase } from '../supabaseClient';
+import {useEffect, useState, useRef} from 'react'; //imports react hooks use effect, usestate and useref from react
+import { supabase } from '../supabaseClient'; //imports the supabase client with the keys from the supabase client
 
-import { IoSend } from "react-icons/io5";
+import { IoSend } from "react-icons/io5"; //imports the iosend react icon from the react icons dependency 
 
-import { RiDragMove2Line } from "react-icons/ri";
+import { RiDragMove2Line } from "react-icons/ri"; //imports the drag react icon from the react icons dependency
 
 
 
-import { FaCheck } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa"; //imports the check icon from the react icons dependency
 
-import './App.css'
+import './App.css' //imports the App.css file which is used to style the components
 
-import Fambam from '../assets/Fambam.png';
+import Fambam from '../assets/Fambam.png'; //imports the fambam logo
 
-import { PiSignOutBold } from "react-icons/pi";
+import { PiSignOutBold } from "react-icons/pi"; //imports the sign out icon from the react icons dependency
 
-export default function App() {
+export default function App() { //exports app function
 
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]); //useState is used to change the currentstate of the posts
 
-  const [name, setName] = useState('')
+  const [name, setName] = useState('') //usestate is used to change the currentstate of the name
   
 
 
-  const fetchPosts = async () => {
-    const { data, error } = await supabase
-      .from('posts')
-      .select('*')
+  const fetchPosts = async () => { //a function that waits for the result
+    const fetchResult = await supabase.from('posts').select('*') //Waits for supabase to select all (*) rows from post
+
+    const data = fetchResult.data; //This is then stored in an object, data is inside the object
+
+    const error = fetchResult.error
 
     if (error) {
       console.log(error);
