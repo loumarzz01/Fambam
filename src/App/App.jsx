@@ -136,7 +136,6 @@ export default function App() {
   return (
     <div className='container'>
 
-      <p style={{color: 'red'}}>Authentication is currently under development.</p>
 
       <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}} style={{position: 'absolute', top: "30px", left: "30px", display: "flex", alignItems: 'center'}}>
 
