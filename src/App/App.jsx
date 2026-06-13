@@ -55,6 +55,8 @@ export default function App() {
   const [newPost, setNewPost] = useState('')
 
 
+
+
   const submitPost = async () => {
 
     console.log("Post:", newPost);
@@ -69,9 +71,15 @@ export default function App() {
       minute: '2-digit'
     });
 
+    const sessionResult = await supabase.auth.getSession()
+
+    const sessionData = sessionResult.data;
+
+    const userId = sessionData.session.user.id;
+
     const { error } = await supabase
       .from('posts')
-      .insert([{ name: name, content: newPost, time: now }]);
+      .insert([{ user_id: userId, name: name, content: newPost, time: now }]);
 
     console.log("Insert Error:", error)
 
@@ -80,14 +88,20 @@ export default function App() {
       return;
     }
 
+    
+
 
 
     fetchPosts();
     setNewPost('');
   };
 
+  
+
   const bottomRef = useRef(null);
   const prevCountRef = useRef(0)
+
+  const [currentUserId, setCurrentUserId] = useState('')
 
   useEffect(() => {
     if (posts.length > prevCountRef.current) {
@@ -110,6 +124,10 @@ export default function App() {
       console.log("No logged in user")
       return;
     }
+
+    
+
+    setCurrentUserId(userId)
 
 
     const {data, error} = await supabase
@@ -163,20 +181,26 @@ export default function App() {
 
         <div className='scroll'>
 
-          {posts?.map((post) => (
+          {posts?.map((post) => {
 
-            <div key={post.id} className='message'>
+            const isMine = post.user_id === currentUserId;
+
+            return (
+
+              <div key={post.id} 
+              className={`message ${isMine ? 'my-message' : 'other-message'}`}
+              >
+                  
+                <p className='post-name'>{post.name}</p>
+                <p className="text" >{post.content}</p>
+                <p className='post-time'>{post.time}</p>
                 
-              <p className='post-name'>{post.name}</p>
-              <p className="text" >{post.content}</p>
-              <p className='post-time'>{post.time}</p>
+              </div>
+            )
 
-              <div ref={bottomRef} />
-              
-            </div>
+            })}
 
-
-          ))}
+            <div ref={bottomRef} />
 
           
 
