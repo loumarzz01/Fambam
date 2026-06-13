@@ -5,6 +5,8 @@ import { supabase } from '../supabaseClient';
 
 import { IoSend } from "react-icons/io5";
 
+import { FaCheck } from "react-icons/fa";
+
 import './App.css'
 
 import Fambam from '../assets/Fambam.png';
@@ -16,6 +18,7 @@ export default function App() {
   const [posts, setPosts] = useState([]);
 
   const [name, setName] = useState('')
+  
 
 
   const fetchPosts = async () => {
@@ -46,8 +49,6 @@ export default function App() {
   }, []);
 
   const [newPost, setNewPost] = useState('')
-
-
 
 
   const submitPost = async () => {
@@ -139,10 +140,16 @@ export default function App() {
 
 
       <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}} style={{position: 'absolute', top: "30px", left: "30px", display: "flex", alignItems: 'center'}}>
-
-        <PiSignOutBold style={{color: "white"}} />
         <p style={{fontSize: '12px'}}>Sign Out</p>
+        <PiSignOutBold />
       </div>
+
+        
+      <div className="log-in-message">
+        <p>Logged in as {name}</p>
+        <FaCheck style={{color: "white"}} />
+      </div>
+        
 
 
       <img src={Fambam} className="fambam-logo"/>
@@ -153,19 +160,21 @@ export default function App() {
         <div className='scroll'>
 
           {posts?.map((post) => (
-            <div key={post.id}>
-            <div className='message'>
+
+            <div key={post.id} className='message'>
                 
               <p className='post-name'>{post.name}</p>
               <p className="text" >{post.content}</p>
               <p className='post-time'>{post.time}</p>
+
+              
               
             </div>
 
-            <div ref={bottomRef} />
 
-            </div>
           ))}
+
+          <div ref={bottomRef} />
 
           
 

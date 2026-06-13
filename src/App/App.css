@@ -44,6 +44,20 @@ body {
 
 }
 
+.log-in-message {
+  top: 65px;
+  left: 30px;
+
+
+  color: #e54646;
+  position: absolute;
+
+  font-size: 13px;
+
+  display: flex;
+
+
+}
 
 .message {
   background-color: #f1f1f1;

@@ -13,6 +13,8 @@ export default function SignUp( {onSwitchToSignUp}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [errorMessage, setErrorMessage ] = useState('')
+
   const signIn = async () => {
     const {data, error} = await supabase.auth.signInWithPassword({
       email,
@@ -20,6 +22,7 @@ export default function SignUp( {onSwitchToSignUp}) {
     });
 
     if (error) {
+      setErrorMessage(error.message)
       console.error(error)
       return;
     }
@@ -54,6 +57,18 @@ export default function SignUp( {onSwitchToSignUp}) {
           placeholder='Enter enter your password'
           />
         </div>
+
+        {errorMessage && (
+            <p
+              style={{
+                color: '#e54646',
+                fontSize: '12px',
+                marginTop: '8px'
+              }}
+            >
+            {errorMessage}
+            </p>
+        )}
 
         
           
