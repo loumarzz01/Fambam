@@ -133,26 +133,21 @@ export default function App() {
           
         </div>
 
-        <div className='input-and-button'>
-          <input className="input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder='Enter name'
-          />
+        <div className='message-input-container'>
 
-          <input className="input"
+          <input className="message-input"
             value={newPost}
             onChange={(e) => setNewPost(e.target.value)}
             placeholder='Send post'
           />
 
-          
-
-          <button className="post-button" onClick={submitPost}>
-            <IoSend className="send-icon"/>
+          <button className="send-button" onClick={submitPost}>
+            <IoSend/>
           </button>
 
         </div>
+
+        
 
 
 
