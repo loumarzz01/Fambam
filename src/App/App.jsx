@@ -111,6 +111,9 @@ export default function App() {
       .eq('id', userId) //Find rows where ID is EQUAL TO (EQ) userId
       .single(); //expect one row
 
+      
+    console.log("Looking for user:", userId);
+
     console.log("Profile:", data);
     console.log("Profile Error:", error);
 
