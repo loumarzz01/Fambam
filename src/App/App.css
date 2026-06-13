@@ -155,3 +155,15 @@ input:focus {
 .send-icon {
   align-self: auto;
 }
+
+.sign-out-button {
+
+  position: absolute;
+  background-color: #e54646;
+  border: none;
+  padding: 0px 10px;
+  gap: 5px;
+  border-radius: 8px;
+  color: white;
+  font-family: Poppins;
+}

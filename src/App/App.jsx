@@ -9,6 +9,8 @@ import './App.css'
 
 import Fambam from '../assets/Fambam.png';
 
+import { PiSignOutBold } from "react-icons/pi";
+
 export default function App() {
 
   const [posts, setPosts] = useState([]);
@@ -134,6 +136,13 @@ export default function App() {
   return (
     <div className='container'>
 
+      <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}} style={{position: 'absolute', top: "30px", left: "30px", display: "flex", alignItems: 'center'}}>
+
+        <PiSignOutBold style={{color: "white"}} />
+        <p style={{fontSize: '12px'}}>Sign Out</p>
+      </div>
+
+
       <img src={Fambam} className="fambam-logo"/>
 
       <div className='message-container'>
@@ -169,14 +178,7 @@ export default function App() {
 
         </div>
 
-        <button
-        onClick={async () => {
-          await supabase.auth.signOut();
-        }}
-        >
-          Sign Out
-        </button>
-
+        
         
 
 
