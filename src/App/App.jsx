@@ -166,6 +166,14 @@ export default function App() {
 
         </div>
 
+        <button
+        onClick={async () => {
+          await supabase.auth.signOut();
+        }}
+        >
+          Sign Out
+        </button>
+
         
 
 
