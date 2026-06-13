@@ -113,22 +113,21 @@ export default function App() {
 
       <img src={Fambam} className="fambam-logo"/>
 
-      <div className='messageContainer'>
+      <div className='message-container'>
 
 
         <div className='scroll'>
-          <div className='messages'>
-            {posts?.map((post) => (
-              <div className='message'>
-                
-                <p className='post-name'>{post.name}</p>
-                <p className="text" key={post.id}>{post.content}</p>
-                <p className='post-time'>{post.time}</p>
-              </div>
-            ))}
 
-            <div ref={bottomRef} />
-          </div>
+          {posts?.map((post) => (
+            <div className='message'>
+                
+              <p className='post-name'>{post.name}</p>
+              <p className="text" key={post.id}>{post.content}</p>
+              <p className='post-time'>{post.time}</p>
+            </div>
+          ))}
+
+          <div ref={bottomRef} />
 
           
         </div>
