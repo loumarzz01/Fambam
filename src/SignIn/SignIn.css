@@ -28,6 +28,13 @@ body {
   
 }
 
+.fambam-logo {
+  width: 150px;
+  height: 70px;
+  top: 10px;
+  position: absolute;
+}
+
 .post-button {
   font-family: poppins;
   background-color: #e54646;
@@ -36,6 +43,7 @@ body {
   cursor: pointer;
   border: none;
   color: white;
+  padding: 0px 10px;
   outline: none;
   transition: 0.2s;
   margin-top: 30px;

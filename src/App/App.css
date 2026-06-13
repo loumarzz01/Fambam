@@ -84,6 +84,13 @@ body {
   margin-left: -30px;
 }
 
+.fambam-logo {
+  width: 150px;
+  height: 70px;
+  top: 10px;
+  position: absolute;
+}
+
 
 input {
   font-family: 'Poppins', sans-serif;

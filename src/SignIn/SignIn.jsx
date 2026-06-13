@@ -1,13 +1,36 @@
 
 import './SignIn.css'
-import { MdOutlineEmail } from "react-icons/md";
-import { MdLockOutline } from "react-icons/md";
-import { MdDriveFileRenameOutline } from "react-icons/md";
+import { useState } from 'react';
 
-export default function SignUp() {
+import { supabase } from '../supabaseClient';
+
+import Fambam from '../assets/Fambam.png';
+
+export default function SignUp( {onSwitchToSignUp}) {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signIn = async () => {
+    const {data, error} = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error(error)
+      return;
+    }
+
+    console.log(data);
+    console.log('User:', data.user);
+    console.log('Session:', data.session);
+  }
 
   return (
     <div className='container'>
+
+      <img src={Fambam} className="fambam-logo"/>
 
       <div className='messageContainer'>
 
@@ -18,21 +41,29 @@ export default function SignUp() {
 
         <div className='input-container'>
           <p className='input-guide'>Email address</p>
-          <input className="input"
+          <input className="input" value={email} onChange={(e) => setEmail(e.target.value)}
           placeholder='Enter your email address'
           />
         </div>
         
         <div className='input-container'>
           <p className='input-guide'>Password</p>
-          <input className="input"
+          <input className="input" value={password} onChange={(e) => setPassword(e.target.value)}
           placeholder='Enter enter your password'
           />
         </div>
 
-        <button className="post-button">
+        
+          
+
+        <button className="post-button" onClick={signIn}>
           <p>Sign In</p>
         </button>
+
+        <div style={{display: 'flex', flexDirection: 'row', gap: '5px', justifyContent: 'center'}}>
+          <p style={{color: '#868686', fontSize: "12px"}}>Don't have an account yet? </p>
+          <p style={{color: '#e54646', fontSize: "12px", cursor: 'pointer'}} onClick={onSwitchToSignUp}>Create an account </p>
+        </div>
 
 
       </div>

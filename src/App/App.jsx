@@ -5,6 +5,8 @@ import { IoSend } from "react-icons/io5";
 
 import './App.css'
 
+import Fambam from '../assets/Fambam.png';
+
 export default function App() {
 
   const [posts, setPosts] = useState([]);
@@ -78,12 +80,38 @@ export default function App() {
   }, [posts])
 
   
-  
+  const fetchProfile = async () => {
+    const {data: sessionData } = await supabase.auth.getSession(); //const data = result.session
+
+    const userId = sessionData.session.user.id;
+
+    console.log(userId)
+
+    const {data, error} = await supabase
+      .from('profiles')
+      .select('name') //only give name column
+      .eq('id', userId) //Find rows where ID is EQUAL TO (EQ) userId
+      .single(); //expect one row
+
+    
+    if (error) {
+      console.log(error)
+      return;
+    }
+
+    setName(data.name)
+  }
+
+  useEffect(() => {
+    fetchProfile()
+  }, [])
 
 
 
   return (
     <div className='container'>
+
+      <img src={Fambam} className="fambam-logo"/>
 
       <div className='messageContainer'>
 

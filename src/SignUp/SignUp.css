@@ -33,12 +33,20 @@ body {
   background-color: #e54646;
   box-shadow: 0 0 10px #e5464670;
   border-radius: 8px;
+  padding: 0px 10px;
   cursor: pointer;
   border: none;
   color: white;
   outline: none;
   transition: 0.2s;
   margin-top: 30px;
+}
+
+.fambam-logo {
+  width: 150px;
+  height: 70px;
+  top: 10px;
+  position: absolute;
 }
 
 .input-container {
