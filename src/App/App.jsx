@@ -153,15 +153,21 @@ export default function App() {
         <div className='scroll'>
 
           {posts?.map((post) => (
+            <div>
             <div className='message'>
                 
               <p className='post-name'>{post.name}</p>
               <p className="text" key={post.id}>{post.content}</p>
               <p className='post-time'>{post.time}</p>
+              
+            </div>
+
+            <div ref={bottomRef} />
+
             </div>
           ))}
 
-          <div ref={bottomRef} />
+          
 
           
         </div>
