@@ -98,9 +98,11 @@ export default function App() {
                 <p className='post-time'>{post.time}</p>
               </div>
             ))}
+
+            <div ref={bottomRef} />
           </div>
 
-          <div ref={bottomRef} />
+          
         </div>
 
         <div className='input-and-button'>
