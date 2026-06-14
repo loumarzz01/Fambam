@@ -155,19 +155,10 @@ export default function Chat() { //exports app function
 
 
   return (
-    <div className='app-container'>
+    <div className='container'>
 
 
-      <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}} style={{position: 'absolute', top: "30px", left: "30px", display: "flex", alignItems: 'center'}}>
-        <p style={{fontSize: '12px'}}>Sign Out</p>
-        <PiSignOutBold />
-      </div>
-
-        
-      <div className="log-in-message">
-        <p>Logged in as {name}</p>
-      </div>
-        
+      
 
 
       <img src={Fambam} className="fambam-logo"/>
@@ -224,12 +215,21 @@ export default function Chat() { //exports app function
 
         </div>
 
-        
-        
-
-
 
       </div>
+
+      <div className='bottom-info-wrapper'>
+        <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}}>
+          <p style={{fontSize: '12px'}}>Sign Out</p>
+          <PiSignOutBold />
+        </div>
+
+          
+        <div className="log-in-message">
+          <p>Logged in as {name}</p>
+        </div>
+      </div>
+        
 
     </div>
   )
