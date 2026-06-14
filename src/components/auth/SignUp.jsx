@@ -16,10 +16,13 @@ export default function SignUp( {onSwitchToSignIn}) {
   const [errorMessage, setErrorMessage ] = useState('')
 
   const signUp = async () => {
-    const {data, error} = await supabase.auth.signUp({
+    const result = await supabase.auth.signUp({
       email,
       password,
     });
+
+    const data = result.data
+    const error = result.error
 
     setErrorMessage('')
 
@@ -53,7 +56,7 @@ export default function SignUp( {onSwitchToSignIn}) {
 
       <img src={Fambam} className="fambam-logo"/>
 
-      <div className='messageContainer'>
+      <div className='message-container'>
 
         
 
@@ -99,7 +102,7 @@ export default function SignUp( {onSwitchToSignIn}) {
           <p>Create an account</p>
         </button>
 
-        <div style={{display: 'flex', flexDirection: 'row', gap: '5px', justifyContent: 'center'}}>
+        <div className="account-clarification">
           <p style={{color: '#868686', fontSize: "12px"}}>Already have an account? </p>
           <p style={{color: '#e54646', fontSize: "12px", cursor: 'pointer'}} onClick={onSwitchToSignIn}>Sign in</p>
         </div>

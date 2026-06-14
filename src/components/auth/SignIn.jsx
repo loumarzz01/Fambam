@@ -16,10 +16,14 @@ export default function SignUp( {onSwitchToSignUp}) {
   const [errorMessage, setErrorMessage ] = useState('')
 
   const signIn = async () => {
-    const {data, error} = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const result = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+
+    const data = result.data
+    const error = result.error
+
 
     if (error) {
       setErrorMessage(error.message)
@@ -37,7 +41,7 @@ export default function SignUp( {onSwitchToSignUp}) {
 
       <img src={Fambam} className="fambam-logo"/>
 
-      <div className='messageContainer'>
+      <div className='message-container'>
 
         <p style={{fontWeight: 500, textAlign: 'center'}}>Sign in to Fambam</p>
         <p style={{color: "#868686", fontSize: 14, marginTop: 0, textAlign: 'center'}}>Welcome back! Please sign in to continue.</p>
@@ -77,8 +81,8 @@ export default function SignUp( {onSwitchToSignUp}) {
           <p>Sign In</p>
         </button>
 
-        <div style={{display: 'flex', flexDirection: 'row', gap: '5px', justifyContent: 'center'}}>
-          <p style={{color: '#868686', fontSize: "12px"}}>Don't have an account yet? </p>
+        <div className="account-clarification">
+          <p style={{color: '#868686', fontSize: "12px",}}>Don't have an account yet? </p>
           <p style={{color: '#e54646', fontSize: "12px", cursor: 'pointer'}} onClick={onSwitchToSignUp}>Create an account </p>
         </div>
 

@@ -19,7 +19,9 @@ export default function AuthGate() {
 
     useEffect(() => {
         const getSession = async () => {
-            const {data} = await supabase.auth.getSession(); //const data = result.data
+            const result = await supabase.auth.getSession();
+
+            const data = result.data
 
             console.log("Session from Supabase:", data.session)
 
@@ -39,7 +41,7 @@ export default function AuthGate() {
 
         const subscription = authListener.data.subscription; //Listener returns an object that contains a "subscription"
 
-        return () => {
+        return () => { 
             subscription?.unsubscribe() //Stops listening to avoid memory leaks. Return means "when this component leaves the screen, clean up the subscription"
         }
 
