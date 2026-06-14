@@ -13,6 +13,7 @@
   box-sizing: border-box;
 
   align-items: center;
+
 }
 
 .message-container {
@@ -60,7 +61,7 @@
 .fambam-logo {
   width: 150px;
   height: 70px;
-  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 
@@ -165,6 +166,12 @@ input:focus {
 
   align-items: center;
   justify-content: center;
+
+  transition: 0.5s ease;
+}
+
+.send-button:hover {
+  background-color: #e26464;
 }
 
 .message-input-container {
@@ -215,6 +222,11 @@ input:focus {
   border-radius: 8px;
   color: white;
   font-family: Poppins;
+  transition: 0.5s ease;
+}
+
+.sign-out-button:hover {
+  background-color: #e26464;
 }
 
 .other-message {
@@ -237,5 +249,5 @@ input:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
+
 }
