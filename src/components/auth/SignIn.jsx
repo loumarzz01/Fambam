@@ -4,9 +4,9 @@
 import './SignIn.css'
 import { useState } from 'react';
 
-import { supabase } from '../supabaseClient';
+import { supabase } from '../../lib/supabaseClient';
 
-import Fambam from '../assets/Fambam.png';
+import Fambam from '../../assets/Fambam.png';
 
 export default function SignUp( {onSwitchToSignUp}) {
 
@@ -53,7 +53,7 @@ export default function SignUp( {onSwitchToSignUp}) {
         
         <div className='input-container'>
           <p className='input-guide'>Password</p>
-          <input className="input" value={password} onChange={(e) => setPassword(e.target.value)}
+          <input type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)}
           placeholder='Enter enter your password'
           />
         </div>

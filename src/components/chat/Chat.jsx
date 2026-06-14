@@ -1,81 +1,76 @@
-//App.jsx
+//Chat.jsx
 
 import {useEffect, useState, useRef} from 'react'; //imports react hooks use effect, usestate and useref from react
-import { supabase } from '../supabaseClient'; //imports the supabase client with the keys from the supabase client
+import { supabase } from '../../lib/supabaseClient'; //imports the supabase client with the keys from the supabase client
 
 import { IoSend } from "react-icons/io5"; //imports the iosend react icon from the react icons dependency 
 
-import { RiDragMove2Line } from "react-icons/ri"; //imports the drag react icon from the react icons dependency
 
+import './Chat.css' //imports the App.css file which is used to style the components
 
-
-import { FaCheck } from "react-icons/fa"; //imports the check icon from the react icons dependency
-
-import './App.css' //imports the App.css file which is used to style the components
-
-import Fambam from '../assets/Fambam.png'; //imports the fambam logo
+import Fambam from '../../assets/Fambam.png'; //imports the fambam logo
 
 import { PiSignOutBold } from "react-icons/pi"; //imports the sign out icon from the react icons dependency
 
-export default function App() { //exports app function
+export default function Chat() { //exports app function
 
-  const [posts, setPosts] = useState([]); //useState is used to change the currentstate of the posts
+  const [posts, setPosts] = useState([]); //useState is used to change the currentstate of the array, posts
 
-  const [name, setName] = useState('') //usestate is used to change the currentstate of the name
+  const [name, setName] = useState('') //usestate is used to change the currentstate of the string, name
   
 
 
   const fetchPosts = async () => { //a function that waits for the result
     const fetchResult = await supabase.from('posts').select('*') //Waits for supabase to select all (*) rows from post
 
-    const data = fetchResult.data; //This is then stored in an object, data is inside the object
+    const data = fetchResult.data; //This line takes the data property from the fetchResult object and stores it in a new variable called data
 
-    const error = fetchResult.error
+    const error = fetchResult.error //This line takes the error property from the fetchResult object and stores it a new variable called data
 
-    if (error) {
-      console.log(error);
-      return;
+    if (error) { //If something inside error exists
+      console.log(error); //then that error is shown in the console
+      return; //this stops the function immediately
     }
 
     
 
-    setPosts(data || []);
+    setPosts(data || []); //posts is then set to the either the data retrieved or nothing
   }
   
-  useEffect(() => {
-    const load = async () => {
-      fetchPosts()
+  useEffect(() => { //runs when the app refreshes
+    const load = async () => { //This function waits until fetch posts has run
+      fetchPosts() //This is calls the function fetchPosts()
     }
 
-    const interval = setInterval(() => {
-      load()
-    }, 2000)
+    const interval = setInterval(() => { //This creates an interval function
+      load() //This calls the load function which waits for the fetchPosts() function to finish fetching data
+    }, 2000) //It is run every 2000 miliseconds (2 seconds)
 
-    return () => clearInterval(interval)
+    return () => clearInterval(interval) //The interval is then cleared in a return statement to avoid taking up anymore memory
   }, []);
 
-  const [newPost, setNewPost] = useState('')
+  const [newPost, setNewPost] = useState('') //useState is used to change the currentstate of the string variable newPost
 
 
 
 
-  const submitPost = async () => {
+  const submitPost = async () => { //This is a function that waits for results
 
-    console.log("Post:", newPost);
-    console.log("Name:", name);
+    console.log("Post:", newPost); //The new post variable is logged to the console
+    console.log("Name:", name); //The name variable is logged to the console
 
-    if (!newPost) {
-      return;
+    if (!newPost) { //If newPost is empty
+      return; // stop this function
     }
 
-    const now = new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit'
+    const now = new Date().toLocaleTimeString([], { //the variable 'now' is set as a string of the local time
+      hour: '2-digit', //The hour is set to 2-digits
+      minute: '2-digit' //The minute is set to 2-digits
     });
 
-    const sessionResult = await supabase.auth.getSession()
+    const sessionResult = await supabase.auth.getSession() //Ask Supabase for the user's current logged in session, wait for the answer, and store the result in a variable called sessionResult
 
-    const sessionData = sessionResult.data;
+    const sessionData = sessionResult.data; 
 
     const userId = sessionData.session.user.id;
 
@@ -160,7 +155,7 @@ export default function App() { //exports app function
 
 
   return (
-    <div className='container'>
+    <div className='app-container'>
 
 
       <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}} style={{position: 'absolute', top: "30px", left: "30px", display: "flex", alignItems: 'center'}}>
@@ -171,7 +166,6 @@ export default function App() { //exports app function
         
       <div className="log-in-message">
         <p>Logged in as {name}</p>
-        <FaCheck style={{color: "white"}} />
       </div>
         
 

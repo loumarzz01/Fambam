@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-import {supabase } from './supabaseClient'
+import { supabase } from '../lib/supabaseClient';
 
-import App from './App/App';
-import SignIn from './SignIn/SignIn';
-import SignUp from './SignUp/SignUp';
+import App from '../pages/App';
+import SignIn from '../components/auth/SignIn';
+import SignUp from '../components/auth/SignUp';
 
 export default function AuthGate() {
     const [session, setSession] = useState(null);
@@ -47,7 +47,7 @@ export default function AuthGate() {
     }, [])
 
     if (loading) {
-        return <p style={{fontStyle: "poppins"}}> Loading... </p>;
+        return <p style={{fontFamily: "Poppins"}}> Loading... </p>;
     }
 
     if (session) {

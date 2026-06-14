@@ -1,21 +1,4 @@
-.container {
-  height: 120vh;
-  box-sizing: border-box;
 
-
-  display: flex;
-  font-family: poppins;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 20px 20px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
 
 .scroll::-webkit-scrollbar {
   display: none;
@@ -63,6 +46,8 @@ body {
   top: 65px;
   left: 30px;
 
+  font-family: 'Poppins', sans-serif;
+
 
   color: #e54646;
   position: absolute;
@@ -82,6 +67,7 @@ body {
 
   max-width: 70%;
   min-width: 10%;
+  font-family: 'Poppins', sans-serif;
   width: fit-content;
   border-radius: 16px;
   

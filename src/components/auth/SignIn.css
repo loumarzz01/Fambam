@@ -74,8 +74,7 @@ input:focus {
   box-shadow: 0 0 5px rgba(229, 70, 70, 0.3);
 }
 
-.input:placeholder {
-  font-family: poppins;
+.input::placeholder {
+  font-family: 'Poppins', sans-serif;
 
 }
-
