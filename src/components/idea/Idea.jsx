@@ -1,4 +1,4 @@
-//Connected Discord-Github. Discord: l.mrz Roblox: loumarzzz00
+//Chat.jsx
 
 import {useEffect, useState, useRef} from 'react'; //imports react hooks use effect, usestate and useref from react
 import { supabase } from '../../lib/supabaseClient'; //imports the supabase client with the keys from the supabase client
@@ -10,7 +10,7 @@ import { BsFillLightbulbFill } from "react-icons/bs";
 import { IoChatbox } from "react-icons/io5";
 
 
-import './Chat.css' //imports the Chat.css file which is used to style the components
+import './Idea.css' //imports the App.css file which is used to style the components
 
 import Fambam from '../../assets/Fambam.png'; //imports the fambam logo
 
@@ -29,7 +29,7 @@ export default function Chat() { //exports app function
 
     const data = fetchResult.data; //This line takes the data property from the fetchResult object and stores it in a new variable called data
 
-    const error = fetchResult.error //extracts error from the supabase response
+    const error = fetchResult.error //This line takes the error property from the fetchResult object and stores it a new variable called data
 
     if (error) { //If something inside error exists
       console.log(error); //then that error is shown in the console
@@ -41,7 +41,7 @@ export default function Chat() { //exports app function
     setPosts(data || []); //posts is then set to the either the data retrieved or nothing
   }
   
-  useEffect(() => { //runs once on mount
+  useEffect(() => { //runs when the app refreshes
     const load = async () => { //This function waits until fetch posts has run
       fetchPosts() //This is calls the function fetchPosts()
     }
@@ -50,7 +50,7 @@ export default function Chat() { //exports app function
       load() //This calls the load function which waits for the fetchPosts() function to finish fetching data
     }, 2000) //It is run every 2000 miliseconds (2 seconds)
 
-    return () => clearInterval(interval) //The interval is then cleared in a return statement to avoid memory leaks
+    return () => clearInterval(interval) //The interval is then cleared in a return statement to avoid taking up anymore memory
   }, []);
 
   const [newPost, setNewPost] = useState('') //useState is used to change the currentstate of the string variable newPost
@@ -74,17 +74,17 @@ export default function Chat() { //exports app function
 
     const sessionResult = await supabase.auth.getSession() //Ask Supabase for the user's current logged in session, wait for the answer, and store the result in a variable called sessionResult
 
-    const sessionData = sessionResult.data; //extracts the session object from the supabase response
+    const sessionData = sessionResult.data; 
 
-    const userId = sessionData.session.user.id; //through the current log in session and the logged-in user object, the user ID is found
+    const userId = sessionData.session.user.id;
 
-    const { error } = await supabase //extracts only the error from the response
-      .from('posts') //looks through the posts table
-      .insert([{ user_id: userId, name: name, content: newPost, time: now }]); //inserts a new row into the posts table which contains the user id, the name, the content, and the time
+    const { error } = await supabase
+      .from('posts')
+      .insert([{ user_id: userId, name: name, content: newPost, time: now }]);
 
     console.log("Insert Error:", error)
 
-    if (error) { //if there is an error it will be displayed in the console
+    if (error) {
       console.error(error);
       return;
     }
@@ -93,67 +93,67 @@ export default function Chat() { //exports app function
     
 
 
-    fetchPosts(); //retrieves the posts from supabase again
-    setNewPost(''); //resets the input to an empty string
+    fetchPosts();
+    setNewPost('');
   };
 
   
 
-  const bottomRef = useRef(null); //creates a reference for the element that is below the chat bubbles
-  const prevCountRef = useRef(0); 
+  const bottomRef = useRef(null);
+  const prevCountRef = useRef(0)
 
   const [currentUserId, setCurrentUserId] = useState('')
 
-  useEffect(() => { //runs whenever the posts variable changes
-    if (posts.length > prevCountRef.current) { //checks if the posts number increases
-      bottomRef.current?.scrollIntoView({ behavior: 'smooth'}) //if it did increase then the page will automatically scroll to the element at the bottom of the chat posts list with a smooth animation
+  useEffect(() => {
+    if (posts.length > prevCountRef.current) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth'})
     }
 
-    prevCountRef.current = posts.length; //the prevCountRef stores the latest number of posts
+    prevCountRef.current = posts.length;
     
   }, [posts])
 
   
   const fetchProfile = async () => {
-    const {data: sessionData } = await supabase.auth.getSession(); //gets the session data from the supabase auth response
+    const {data: sessionData } = await supabase.auth.getSession(); //const data = result.session
 
-    console.log("Session:", sessionData) //the data inside the sessionData variable is displayed in the console
+    console.log("Session:", sessionData)
 
-    const userId = sessionData.session.user.id; //looks into the sessionData object and finds the user ID
+    const userId = sessionData.session.user.id;
 
-    if (!userId) { //if the user id does not exist
-      console.log("No logged in user") //then a message will be displayed in the console
+    if (!userId) {
+      console.log("No logged in user")
       return;
     }
 
     
 
-    setCurrentUserId(userId) //setCurrentUserId stores the id of the user
+    setCurrentUserId(userId)
 
 
-    const {data, error} = await supabase //both the data and error messages are retrieved from the request
+    const {data, error} = await supabase
       .from('profiles')
       .select('name') //only give name column
       .eq('id', userId) //Find rows where ID is EQUAL TO (EQ) userId
       .single(); //expect one row
 
       
-    console.log("Looking for user:", userId); //The user id that is being searched is displayed in the console
+    console.log("Looking for user:", userId);
 
-    console.log("Profile:", data); //the profile data is displayed in the console
-    console.log("Profile Error:", error); //any profile errors are displayed in the console
+    console.log("Profile:", data);
+    console.log("Profile Error:", error);
 
     
-    if (error) { //if there is an error
-      setTimeout(fetchProfile, 1000) //the fetchProfile function will retry after 1 second
+    if (error) {
+      setTimeout(fetchProfile, 1000)
       return;
     }
 
-    setName(data.name) //the name variables holds the name property in the data object
+    setName(data.name)
   }
 
-  useEffect(() => { 
-    fetchProfile() //the fetchProfile function is ran when the screen updates
+  useEffect(() => {
+    fetchProfile()
   }, [])
 
   const [idea, setIdea] = useState(false)

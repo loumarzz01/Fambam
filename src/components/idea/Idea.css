@@ -8,7 +8,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
 
 .container2 {
@@ -18,27 +18,25 @@ body {
 
   flex-direction: column;
 
-  max-width: 800px;
+  max-width: 500px;
 
-  width: 100%;
-  
-  padding: 20px;
+  width: 70%;
 
-  background-color: #979797;
 
 
 }
 
 .message-container {
 
-  
+
+
   border-radius: 24px;
 
   background-color: white;
 
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 
-  
+
 
 }
 
