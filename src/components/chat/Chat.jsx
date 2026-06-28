@@ -172,15 +172,6 @@ export default function Chat() { //exports app function
 
       <img src={Fambam} className="fambam-logo"/>
 
-      <div className='header-buttons'>
-        <div className='chat-button'>
-          <IoChatbox />
-        </div>
-
-        <div className='idea-button'>
-          <BsFillLightbulbFill />
-        </div>
-      </div>
 
       <div className='message-container'>
 
