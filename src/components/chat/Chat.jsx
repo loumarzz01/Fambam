@@ -191,13 +191,15 @@ export default function Chat() { //exports app function
                 <p className='post-name'>{post.name}</p>
                 <p className="text" >{post.content}</p>
                 <p className='post-time'>{post.time}</p>
+
+                <div ref={bottomRef} />
                 
               </div>
             )
 
             })}
 
-            <div ref={bottomRef} />
+            
 
           
 
