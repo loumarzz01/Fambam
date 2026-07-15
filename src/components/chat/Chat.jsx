@@ -24,7 +24,7 @@ export default function Chat() { //exports app function
   
 
 
-  const fetchPosts = async () => { //a function that waits for the result
+  const fetchPosts = async () => { //This function fetches the user posts from the database
     const fetchResult = await supabase.from('posts').select('*') //Waits for supabase to select all (*) rows from post
 
     const data = fetchResult.data; //This line takes the data property from the fetchResult object and stores it in a new variable called data
@@ -41,7 +41,7 @@ export default function Chat() { //exports app function
     setPosts(data || []); //posts is then set to the either the data retrieved or nothing
   }
   
-  useEffect(() => { //runs once on mount
+  useEffect(() => { //This makes it so that the posts load when the user is on the website
     const load = async () => { //This function waits until fetch posts has run
       fetchPosts() //This is calls the function fetchPosts()
     }
@@ -58,7 +58,7 @@ export default function Chat() { //exports app function
 
 
 
-  const submitPost = async () => { //This is a function that waits for results
+  const submitPost = async () => { //This function uploads posts to the database
 
     console.log("Post:", newPost); //The new post variable is logged to the console
     console.log("Name:", name); //The name variable is logged to the console
@@ -104,7 +104,7 @@ export default function Chat() { //exports app function
 
   const [currentUserId, setCurrentUserId] = useState('')
 
-  useEffect(() => { //runs whenever the posts variable changes
+  useEffect(() => { //this function makes it so that when a new post appears, the screen automatically scrolls to the bottom
     if (posts.length > prevCountRef.current) { //checks if the posts number increases
       bottomRef.current?.scrollIntoView({ behavior: 'smooth'}) //if it did increase then the page will automatically scroll to the element at the bottom of the chat posts list with a smooth animation
     }
@@ -114,7 +114,7 @@ export default function Chat() { //exports app function
   }, [posts])
 
   
-  const fetchProfile = async () => {
+  const fetchProfile = async () => { //this function is used to check whether a user is logged in or not
     const {data: sessionData } = await supabase.auth.getSession(); //gets the session data from the supabase auth response
 
     console.log("Session:", sessionData) //the data inside the sessionData variable is displayed in the console
@@ -156,7 +156,7 @@ export default function Chat() { //exports app function
     fetchProfile() //the fetchProfile function is ran when the screen updates
   }, [])
 
-  const [idea, setIdea] = useState(false)
+ 
 
 
   return (
@@ -170,25 +170,30 @@ export default function Chat() { //exports app function
 
       <div className='container2'>
 
-      <img src={Fambam} className="fambam-logo"/>
+      {/* Website logo */}
 
+      <img src={Fambam} className="fambam-logo"/> 
+
+
+      {/* Message bubble */}
 
       <div className='message-container'>
 
 
         <div className='scroll'>
 
-          {posts?.map((post) => {
+          {posts?.map((post) => { //for every post, this function displays the username, the message and the time posted
 
-            const isMine = post.user_id === currentUserId;
+            const isMine = post.user_id === currentUserId; 
 
             return (
+              
 
-              <div key={post.id} 
+              <div key={post.id} //This div makes it so that user's own messages appear red for themselves, but they see grey messages for the other users. This makes it easy to identify which message is theirs and which isn't
               className={`message ${isMine ? 'my-message' : 'other-message'}`}
               >
-                  
-                <p className='post-name'>{post.name}</p>
+                {/* These three pieces of text hold the user's name, message and the time it was posted */}
+                <p className='post-name'>{post.name}</p> 
                 <p className="text" >{post.content}</p>
                 <p className='post-time'>{post.time}</p>
 
@@ -204,7 +209,7 @@ export default function Chat() { //exports app function
           
 
           
-
+        {/* Input Container*/}
           
         </div>
 
@@ -212,16 +217,17 @@ export default function Chat() { //exports app function
 
           <input className="message-input"
             value={newPost}
-            onChange={(e) => setNewPost(e.target.value)}
+            onChange={(e) => setNewPost(e.target.value)} //When the input changes, the NewPost variable is immediately updated even if the user didn't submit the post
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === 'Enter') { //If the user presses enter, the post is submitted - this makes it more efficient for keyboard users
                 submitPost();
               }
             }}
             placeholder='Send post'
           />
 
-          <button className="send-button" onClick={submitPost}>
+          {/* Send button */}
+          <button className="send-button" onClick={submitPost}> 
             <IoSend/>
           </button>
 
@@ -229,15 +235,15 @@ export default function Chat() { //exports app function
 
       </div>
 
-
+      {/* Sign out button */}
 
       <div className='bottom-info-wrapper'>
-        <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}}>
+        <div className="sign-out-button" onClick={async () => {await supabase.auth.signOut();}}> 
           <p style={{fontSize: '12px'}}>Sign Out</p>
           <PiSignOutBold />
         </div>
 
-          
+        {/* Log in message */}
         <div className="log-in-message">
           <p>Logged in as {name}</p>
         </div>
