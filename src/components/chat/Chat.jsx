@@ -5,10 +5,6 @@ import { supabase } from '../../lib/supabaseClient'; //imports the supabase clie
 
 import { IoSend } from "react-icons/io5"; //imports the iosend react icon from the react icons dependency 
 
-import { BsFillLightbulbFill } from "react-icons/bs";
-
-import { IoChatbox } from "react-icons/io5";
-
 
 import './Chat.css' //imports the Chat.css file which is used to style the components
 
